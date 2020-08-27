@@ -18,9 +18,11 @@ $botonCalcular.onclick = function()
 */
 
 //TAREA: completar tareas/clase-5/index.html para que incluya tarea-clase-5.js
+
 //TAREA: crear un formulario donde un usuario pueda ingresar su salario anual.
 //cuando el usuario haga click en el botón "calcular", mostrar el salario mensual
 // en una caja de texto deshabilitada. --> <input type="text" disabled id="salario-mensual"/>
+
 
 //TAREA: En otro archivo html (no Index) y otro archivo js (no tarea-clase-5.js),
 // creá un formulario que capture el primer nombre, segundo nombre, apellido/s y edad del usuario
@@ -56,3 +58,70 @@ Ejemplo form:
 // 2. obtener el número más pequeño y mostrarlo en un <em> pre-creado con el texto "El número más pequeño es..."
 // 3. obtener el número más grande y mostrarlo en un <em> pre-creado con el texto "El número más grande es..."
 // 4. obtener el número que más se repite y mostrarlo en un <em> pre-creado con el texto "El número más frecuente es..."
+
+function agregarNumeros() {
+  const lista = document.querySelectorAll('li');
+
+  for (let i = 0; i < lista.length; i++) {
+    lista[i].textContent = Math.round(Math.random() * 100);
+  }
+
+}
+
+agregarNumeros();
+
+document.querySelector('button').onclick = function () {
+  const lista = document.querySelectorAll('li');
+  let arrayDeNumeros = [];
+  for (let i = 0; i < lista.length; i++) {
+    arrayDeNumeros.push(Number(lista[i].textContent));
+  }
+  console.log(promedio(arrayDeNumeros));
+}
+
+function numeroMenor(array) {
+  let minimo = [100]
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] < minimo) {
+      minimo = array[i]
+    }
+
+  }
+  return minimo;
+}
+
+function numeroMayor(array) {
+  let mayor = 0
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > mayor) {
+      mayor = array[i]
+    }
+
+  }
+  return mayor;
+}
+
+function promedio(array) {
+  let acumulador = 0;
+  for (let i = 0; i < array.length; i++) {
+    acumulador += array[i]
+
+  }
+  return Math.round(acumulador / array.length);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

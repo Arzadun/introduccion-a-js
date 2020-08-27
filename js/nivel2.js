@@ -340,7 +340,17 @@
 // 19% 4 = 3 - en 19 tenemos 4 * 4 + 3, etc.
 
 
-
+for(let i= 1; i <= 50; i++){
+    let FizzBuzz = i;
+    if(i % 3 === 0 ){
+        FizzBuzz="Fizz";
+    }
+    if(i%5===0){
+        FizzBuzz +="Buzz";
+    }
+    console.log(FizzBuzz)
+    
+}
 
 
 
