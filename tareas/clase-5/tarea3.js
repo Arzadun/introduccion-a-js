@@ -16,18 +16,35 @@ document.querySelector("#enviar").onclick = function (event) {
 
     crearBotonCalcular();
     ocultarFormulario();
-    calcularTiempo();
+
+    document.querySelector('#calcular').onclick = function () {
+        calcularTiempo();
+        document.querySelector('strong').style.display = 'inline';
+        return false;
+    }
+
+    document.querySelector('#limpiar').onclick = function () {
+        document.querySelector('strong').style.display = 'none';
+    }
+
     return false;
 };
 
 function crearBotonCalcular() {
     const $form = document.querySelector("#clases");
     const boton = document.createElement("button");
+    const limpiar = document.createElement("button");
 
     boton.id = 'calcular';
     boton.innerText = "Calcular";
 
+    limpiar.id = 'limpiar';
+    limpiar.type = "reset";
+    limpiar.textContent = "Limpiar";
+
+
     $form.appendChild(boton);
+    $form.appendChild(limpiar);
 }
 
 function crearCampos() {
@@ -37,16 +54,19 @@ function crearCampos() {
     const inputHoras = document.createElement("input");
     inputHoras.className = "horas";
     inputHoras.placeholder = "horas";
+    inputHoras.type = "number";
     div.appendChild(inputHoras);
 
     const inputMinutos = document.createElement("input");
     inputMinutos.className = "minutos";
     inputMinutos.placeholder = "minutos";
+    inputMinutos.type = "number";
     div.appendChild(inputMinutos);
 
     const inputSegundos = document.createElement("input");
     inputSegundos.className = "segundos";
     inputSegundos.placeholder = "segundos";
+    inputSegundos.type = "number";
     div.appendChild(inputSegundos);
 
     $form.appendChild(div);
@@ -61,34 +81,68 @@ function ocultarFormulario() {
 
 
 function calcularTiempo() {
-    let acumuladorHoras, acumuladorMinutos, acumuladorSegundos;
-    const botonCalcular = document.querySelector('#calcular');
+    let acumuladorHoras = 0, acumuladorMinutos = 0, acumuladorSegundos = 0;
+
     const horas = document.querySelectorAll('.horas');
     const minutos = document.querySelectorAll('.minutos');
     const segundos = document.querySelectorAll('.segundos');
 
     for (let i = 0; i < horas.length; i++) {
         let cantidadHoras = Number(horas[i].value);
-        acumuladorHoras = + cantidadHoras;
+        acumuladorHoras += cantidadHoras;
 
-        for (let j = 0; j < minutos.length; j++) {
-            let cantidadMinutos = Number(minutos[j].value);
-            acumuladorMinutos = + cantidadMinutos;
 
-            for (let k = 0; k < segundos.length; k++) {
-                let cantidadSegundos = Number(segundos[k].value);
-                acumuladorSegundos = + cantidadSegundos;
-
-            }
-        }
     }
+
+    for (let j = 0; j < minutos.length; j++) {
+        let cantidadMinutos = Number(minutos[j].value);
+        acumuladorMinutos += cantidadMinutos;
+
+
+    }
+
+    for (let k = 0; k < segundos.length; k++) {
+        let cantidadSegundos = Number(segundos[k].value);
+        acumuladorSegundos += cantidadSegundos;
+
+    }
+
+    calculos(acumuladorHoras, acumuladorMinutos, acumuladorSegundos);
+
+}
+
+function calculos(horas, minutos, segundos) {
+
+    let minutos_A_Horas = 0, restoMinutos = 0;
+    if (minutos <= 60) {
+        restoMinutos = minutos;
+        minutos_A_Horas = 0;
+    } else {
+        minutos_A_Horas = Math.round(minutos / 60);
+        restoMinutos = minutos % 60;
+    }
+
+    let segundos_A_Minutos = 0, restoSegundos = 0;
+    if (segundos <= 60) {
+        restoSegundos = segundos;
+        segundos_A_Minutos = 0;
+    } else {
+        segundos_A_Minutos = Math.round(segundos / 60);
+        restoSegundos = segundos % 60;
+    }
+
+    horas += minutos_A_Horas;
+    restoMinutos += segundos_A_Minutos;
+
 
     function mostrarResultado() {
         const mostrar = document.querySelector('strong');
-        mostrar.innerText = `El total de las clases tiene una duracion de ${acumuladorHoras} horas, ${acumuladorMinutos} minutos, y ${acumuladorSegundos} segundos .`
+        mostrar.innerText = `Las clases tienen una duracion de ${horas} horas, ${restoMinutos} minutos, y ${restoSegundos} segundos .`
     }
     mostrarResultado();
 
 }
+
+
 
 
