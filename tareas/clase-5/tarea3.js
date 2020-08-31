@@ -14,32 +14,35 @@ document.querySelector("#enviar").onclick = function (event) {
     crearBotones();
     ocultarFormulario();
 
-    document.querySelector('#calcular').onclick = function () {
-        calcularTiempo();
-        document.querySelector('strong').style.display = 'inline';
-        return false;
-    }
-
-    document.querySelector('#limpiar').onclick = function () {
-        document.querySelector('strong').style.display = 'none';
-    }
     return false;
 };
 
 function crearBotones() {
     const $form = document.querySelector("#clases");
-    const boton = document.createElement("button");
+    const calcular = document.createElement("button");
     const limpiar = document.createElement("button");
+    const textoResultado = document.querySelector('strong');
 
-    boton.id = 'calcular';
-    boton.innerText = "Calcular";
+    calcular.id = 'calcular';
+    calcular.innerText = "Calcular";
 
     limpiar.id = 'limpiar';
     limpiar.type = "reset";
     limpiar.textContent = "Limpiar";
 
-    $form.appendChild(boton);
+    $form.appendChild(calcular);
     $form.appendChild(limpiar);
+
+    calcular.onclick = function () {
+        calcularTiempo();
+        textoResultado.style.display = 'inline';
+        return false;
+    }
+
+    limpiar.onclick = function () {
+        textoResultado.style.display = 'none';
+    }
+
 }
 
 function crearClases(clases) {
