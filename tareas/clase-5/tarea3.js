@@ -86,13 +86,13 @@ function calcularTiempo() {
     const minutos = document.querySelectorAll('.minutos');
     const segundos = document.querySelectorAll('.segundos');
 
-    for (let k = 0; k < segundos.length; k++) {
-        let cantidadSegundos = Number(segundos[k].value);
+    for (let i = 0; i < segundos.length; i++) {
+        let cantidadSegundos = Number(segundos[i].value);
         acumuladorSegundos += cantidadSegundos;
     }
 
-    for (let j = 0; j < minutos.length; j++) {
-        let cantidadMinutos = Number(minutos[j].value);
+    for (let i = 0; i < minutos.length; i++) {
+        let cantidadMinutos = Number(minutos[i].value);
         acumuladorMinutos += cantidadMinutos;
     }
 
@@ -102,10 +102,10 @@ function calcularTiempo() {
     }
 
 
-    calculos(acumuladorHoras, acumuladorMinutos, acumuladorSegundos);
+    asignarTiempo(acumuladorHoras, acumuladorMinutos, acumuladorSegundos);
 }
 
-function calculos(horas, minutos, segundos) {
+function asignarTiempo(horas, minutos, segundos) {
 
     let segundosAMinutos = 0, restoSegundos = 0;
 
@@ -120,14 +120,10 @@ function calculos(horas, minutos, segundos) {
 
     horas += minutosAHoras;
 
-
-    function mostrarResultado() {
-        const mostrar = document.querySelector('strong');
-        mostrar.innerText = `Las clases tienen una duracion de ${horas} horas, ${restoMinutos} minutos, y ${restoSegundos} segundos .`
-    }
-    mostrarResultado();
+    mostrarResultado(horas, restoMinutos, restoSegundos);
 }
 
-
-
-
+function mostrarResultado(horas, minutos, segundos) {
+    const mostrar = document.querySelector('strong');
+    mostrar.innerText = `Las clases tienen una duracion de ${horas} horas, ${minutos} minutos, y ${segundos} segundos .`;
+}
