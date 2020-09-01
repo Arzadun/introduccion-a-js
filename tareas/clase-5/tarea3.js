@@ -47,9 +47,16 @@ function crearBotones() {
 
 function crearClases(clases) {
     const $form = document.querySelector("#clases");
+    let numeroClase = 1;
 
     for (let i = 0; i < clases; i++) {
+
         const div = document.createElement("div");
+
+        const labelClase = document.createElement('label');
+        labelClase.textContent = `Clase ${numeroClase} : `;
+        div.appendChild(labelClase);
+
         const inputHoras = document.createElement("input");
         inputHoras.className = "horas";
         inputHoras.placeholder = "horas";
@@ -69,6 +76,7 @@ function crearClases(clases) {
         div.appendChild(inputSegundos);
 
         $form.appendChild(div);
+        numeroClase++;
     }
 }
 
