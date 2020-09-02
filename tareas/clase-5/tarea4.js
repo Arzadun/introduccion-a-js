@@ -11,7 +11,7 @@ function agregarNumeros() {
   const lista = document.querySelectorAll('li');
 
   for (let i = 0; i < lista.length; i++) {
-    lista[i].textContent = Math.round(Math.random() * 100);
+    lista[i].textContent = Math.round(Math.random() * 10);
   }
 
 }
@@ -20,16 +20,19 @@ agregarNumeros();
 
 document.querySelector('button').onclick = function () {
   const lista = document.querySelectorAll('li');
-  let arrayDeNumeros = [];
+  let listaNumeros = [];
   for (let i = 0; i < lista.length; i++) {
-    arrayDeNumeros.push(Number(lista[i].textContent));
+    listaNumeros.push(Number(lista[i].textContent));
   }
-  console.log(promedio(arrayDeNumeros));
-}
 
-function mostrarResultados(menor,mayor,promedio,frecuente){ 
+  mostrarResultados(numeroMenor(listaNumeros), numeroMayor(listaNumeros), promedio(listaNumeros));
+}
+function mostrarResultados(menor, mayor, promedio, ) {
+
+  const numeroMenor = document.querySelector('#menor').textContent = `El menor número es ${menor} .`
+  const numeroMayor = document.querySelector('#mayor').textContent = `El mayor número es ${mayor} .`
+  const promedioNumeros = document.querySelector('#promedio').textContent = `El promedio es ${promedio} .`
   
-  document.querySelector
 }
 
 
